@@ -1,0 +1,15 @@
+/*
+ * メディアクエリ用mixin
+ */
+@use "functions" as *;
+
+$breakpoints: (
+    // 767px以上のタブレットやモニタで適用
+    "md": "screen and (max-width: #{to-em(767px, 16px)})"
+) !default;
+
+@mixin mq($breakpoint: md) {
+    @media #{map-get($breakpoints, $breakpoint)} {
+        @content;
+    }
+}
