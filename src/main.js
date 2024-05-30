@@ -1,3 +1,5 @@
+import MobileMenu from "./mobile-menu";
+
 import "./style.scss";
 
 class Main {
@@ -8,6 +10,7 @@ class Main {
     }
 
     #init() {
+        new MobileMenu();
         // IntersectionObserverを初期化
         const observer = new IntersectionObserver(
             this.#navAnimation.bind(this),
