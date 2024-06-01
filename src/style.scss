@@ -158,7 +158,8 @@ body {
 
     &.triggered {
         background: rgba(135, 132, 132, 0.7);
-        box-shadow: 10px 0 25px -10px rgba(0, 0, 0, 0.5);
+        // box-shadow: 10px 0 25px -10px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 2px 4px rgba(2, 15, 29, 0.904);
     }
 
     &__container {
