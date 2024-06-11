@@ -210,6 +210,10 @@ body {
     border-bottom-right-radius: 20px;
     overflow: hidden;
 
+    @include mq("md") {
+        height: 75vh;
+    }
+
     & video {
         position: absolute;
         top: 0;
