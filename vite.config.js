@@ -1,25 +1,7 @@
-// vite.config.js
-
-// import { defineConfig } from "vite";
-
-// export default defineConfig({
-//     root: "src",
-//     build: {
-//         outDir: "../dist/", // distフォルダ内に出力
-//         emptyOutDir: true, // ビルド前に出力ディレクトリを空にする
-//         rollupOptions: {
-//             output: {
-//                 entryFileNames: "[name].js", // JSファイル名を変更し、[hash]を使用してキャッシュ無効化を行う
-//             },
-//         },
-//     },
-//     css: {
-//         fileName: "[name].css", // CSSファイル名を変更
-//         chunkFileNames: "[name].css", // チャンクファイル名も変更
-//     },
-// });
-
 import { defineConfig } from "vite";
+// インストールが必要
+import viteImagemin from "vite-plugin-imagemin";
+
 import { resolve } from "path";
 
 const root = "src";
@@ -28,7 +10,35 @@ export default defineConfig({
     root,
     base: "/",
     publicDir: "../public",
-    plugins: [],
+    plugins: [
+        viteImagemin({
+            gifsicle: {
+                optimizationLevel: 7,
+                interlaced: false,
+            },
+            optipng: {
+                optimizationLevel: 7,
+            },
+            mozjpeg: {
+                quality: 20,
+            },
+            pngquant: {
+                quality: [0.65, 0.9],
+                speed: 4,
+            },
+            svgo: {
+                plugins: [
+                    {
+                        name: "removeViewBox",
+                    },
+                    {
+                        name: "removeEmptyAttrs",
+                        active: false,
+                    },
+                ],
+            },
+        }),
+    ],
     build: {
         outDir: "../dist",
         rollupOptions: {
@@ -36,14 +46,7 @@ export default defineConfig({
                 // htmlを追加する場合にはこちらに追記
                 index: resolve(root, "index.html"),
             },
-            output: {
-                entryFileNames: "[name].js", // JSファイル名を変更し、[hash]を使用してキャッシュ無効化を行う
-            },
         },
-    },
-    css: {
-        fileName: "[name].css", // CSSファイル名を変更
-        chunkFileNames: "[name].css", // チャンクファイル名も変更
     },
     server: {
         host: true,
